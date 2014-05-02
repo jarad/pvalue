@@ -1,6 +1,6 @@
 library(shiny)
 
-shinyServer(function(input,out) {
+shinyServer(function(input,output) {
   output$plot <- renderPlot({
     plot(0,0)
   })
