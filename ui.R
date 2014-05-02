@@ -2,7 +2,7 @@ library(shiny)
 
 shinyUI(pageWithSidebar(
   
-  titlePanel("Null hypothesis probability conditional on an observed pvalue"),
+  headerPanel("Null hypothesis probability conditional on an observed pvalue"),
   
   sidebarPanel(
     #style="min-width:235px;max-width:275px",
@@ -28,7 +28,6 @@ shinyUI(pageWithSidebar(
     plotOutput('plot'),
     h4('Results'),
     textOutput('text'),
-    hr(),
     includeMarkdown('help.md')
   )
 ))
