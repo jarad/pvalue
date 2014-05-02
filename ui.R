@@ -1,19 +1,34 @@
 library(shiny)
 
-shinyUI(fluidPage(
+shinyUI(pageWithSidebar(
   
-  titlePanel("Posterior probability conditional on an observed pvalue"),
+  titlePanel("Null hypothesis probability conditional on an observed pvalue"),
   
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput('pH0', 'Pr(H0)',
-                  min=0, max=1,    value=0.5,  step=0.1,  round=3),
-      sliderInput('pvalue', 'Observed p-value',
-                  min=0, max=0.05, value=0.05, step=.005, round=3)
-    ),
+  sidebarPanel(
+    #style="min-width:235px;max-width:275px",
+    sliderInput('pvalue', 'Observed pvalue',
+                min=.001, max=0.05, value=0.05, step=.001, round=FALSE),
+    br(),
+    sliderInput('pH0', 'Proportion of true null hypotheses',
+                min=0, max=1,    value=0.5,  step=0.1,  round=FALSE),
+    br(),
     
-    mainPanel(
-      plotOutput('plot')
-    )
+    h4('Alternative distribution'),
+    selectInput('distribution', '', 'normal', 'normal'),
+    numericInput('mean', 'Mean', value=0),
+    numericInput('sd', 'Standard deviation', value=1, min=0),
+    br(),
+    h4('Simulation parameters'),
+    numericInput('n', 'Number of simulations', 100, min=1, step=1),
+    numericInput('max_sims', 'Maximum attempts per simulation', 1000, min=1, step=1),
+    submitButton('Simulate.')
+  ),
+    
+  mainPanel(
+    plotOutput('plot'),
+    h4('Results'),
+    textOutput('text'),
+    hr(),
+    includeMarkdown('help.md')
   )
 ))
