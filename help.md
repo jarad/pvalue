@@ -12,3 +12,5 @@ For each simulation,  the following is performed:
 1. If the pvalue is not close, the applet retries the entire simulation from step 1.
       
 For each simulation, the plot above has a point indicating whether the simulation that produced the observed pvalue came from the null hypothesis (1) or the alternative hypothesis (0). In addition, the plot provides a running estimate (dashed line), as well as a 95% CI (solid line), for the probability that the null hypothesis is true.
+
+The idea behind this app is [stolen from Jim Berger](http://www.stat.duke.edu/~berger/p-values.html) and German Molina who previously wrote a [similar applet in Java](http://www.stat.duke.edu/~berger/applet2/pvalue.html). 
