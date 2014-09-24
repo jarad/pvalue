@@ -25,9 +25,9 @@ shinyUI(pageWithSidebar(
   ),
     
   mainPanel(
-    plotOutput('plot'),
-    h4('Results'),
-    textOutput('text'),
-    includeMarkdown('help.md')
+    tabsetPanel(
+      tabPanel('Results', plotOutput('plot'), textOutput('text')),
+      tabPanel('Help', includeMarkdown('help.md'))
+    )
   )
 ))
