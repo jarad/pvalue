@@ -1,7 +1,7 @@
 require(shiny)
 require(markdown)
 
-shinyUI(pageWithSidebar(
+shinyUI(fluidPage(
   
   headerPanel("Null hypothesis probability conditional on an observed pvalue"),
   
@@ -27,7 +27,8 @@ shinyUI(pageWithSidebar(
     
   mainPanel(
     tabsetPanel(
-      tabPanel('Results', plotOutput('plot'), textOutput('text')),
+      tabPanel('Basic',                  plotOutput('basic_plot'), textOutput('basic_text')),
+      tabPanel('with Monte Carlo error', plotOutput('plot' ),      textOutput('text')),
       tabPanel('Help', includeMarkdown('help.md'))
     )
   )
