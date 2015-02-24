@@ -17,7 +17,10 @@ isH0 = function(input) {
       # theta is drawn from a user defined distribution
       
       theta = switch(input$distribution,
-                     'normal' = rnorm(1, input$mean, input$sd))
+                     'normal' = rnorm(1, input$normal_mean, input$normal_sd),
+                     'point mass' = input$point_location,
+                     't' = input$t_location+input$t_scale * rt(1,input$t_df),
+                     'log-normal' = rlnorm(1, input$lognormal_location, input$lognormal_scale))
  #     theta = rnorm(1, mean, sd)
       y = rnorm(1,theta)
     }

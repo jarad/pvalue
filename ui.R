@@ -15,14 +15,37 @@ shinyUI(fluidPage(
     br(),
     
     h4('Alternative distribution'),
-    selectInput('distribution', '', 'normal', 'normal'),
-    numericInput('mean', 'Mean', value=0),
-    numericInput('sd', 'Standard deviation', value=1, min=0),
+    selectInput('distribution', '', 
+                list('normal',
+                     'point mass',
+                     't',
+                     'log-normal'), 
+                'normal'),
+    conditionalPanel(
+      condition = 'input.distribution == "normal"',
+      numericInput('normal_mean', 'Mean', value=0),
+      numericInput('normal_sd', 'Standard deviation', value=1, min=0)
+    ),
+    conditionalPanel(
+      condition = 'input.distribution == "point mass"',
+      numericInput('point_location', 'Location', value=0)
+    ),
+    conditionalPanel(
+      condition = 'input.distribution == "t"',
+      numericInput('t_df', 'Degrees of freedom', value=1),
+      numericInput('t_location', 'Location', value=0),
+      numericInput('t_scale', 'Scale', value=1)
+    ),
+    conditionalPanel(
+      condition = 'input.distribution == "log-normal"',
+      numericInput('lognormal_location', 'Location', value=0),
+      numericInput('lognormal_scale', 'Scale', value=1)
+    ),
     br(),
     h4('Simulation parameters'),
-    numericInput('n', 'Number of simulations', 100, min=1, step=1),
-    numericInput('max_sims', 'Maximum attempts per simulation', 1000, min=1, step=1),
-    submitButton('Simulate.')
+    numericInput('n', 'Number of simulations', 1, min=1, step=1),
+    numericInput('max_sims', 'Maximum attempts per simulation', 1000, min=1, step=1)#,
+#    submitButton('Simulate.')
   ),
     
   mainPanel(

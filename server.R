@@ -9,7 +9,7 @@ shinyServer(function(input,output) {
   simulated_data = reactive({
     y = rep(NA, input$n)
     for (i in 1:input$n) y[i] = isH0(input)
-
+    
     data.frame(n=1:length(y), y=y)
   })
   
@@ -28,15 +28,14 @@ shinyServer(function(input,output) {
   })
   
   output$basic_plot <- renderPlot({
-    ggplot(basic_data(), aes(x=Truth, y=Percentage)) + 
+    ggplot(basic_data(), aes(x=Truth, y=Percentage, label=Number)) + 
       geom_bar(stat="identity") + 
+      geom_text(vjust=-.5) + 
       ylim(c(0,1))
   })
   
   output$basic_text <- renderText({
     o = basic_data()
-    
-    print(o)
     
     n = sum(o$Number)
     y = o$Number[o$Truth == "Null hypothesis"]
