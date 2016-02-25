@@ -11,7 +11,7 @@ shinyUI(fluidPage(
                 min=.001, max=0.05, value=0.05, step=.001, round=FALSE),
     br(),
     sliderInput('pH0', 'Proportion of true null hypotheses',
-                min=0, max=1,    value=0.5,  step=0.1,  round=FALSE),
+                min=0, max=1,    value=0.5,  step=0.05,  round=FALSE),
     br(),
     
     h4('Alternative distribution'),
@@ -19,7 +19,10 @@ shinyUI(fluidPage(
                 list('normal',
                      'point mass',
                      't',
-                     'log-normal'), 
+                     'log-normal',
+                     'gamma',
+                     'beta',
+                     'uniform'), 
                 'normal'),
     conditionalPanel(
       condition = 'input.distribution == "normal"',
@@ -40,6 +43,21 @@ shinyUI(fluidPage(
       condition = 'input.distribution == "log-normal"',
       numericInput('lognormal_location', 'Location', value=0),
       numericInput('lognormal_scale', 'Scale', value=1)
+    ),
+    conditionalPanel(
+      condition = 'input.distribution == "gamma"',
+      numericInput('gamma_shape', 'Shape', value=1),
+      numericInput('gamma_rate', 'Rate', value=1)
+    ),
+    conditionalPanel(
+      condition = 'input.distribution == "beta"',
+      numericInput('beta_shape1', 'Shape1', value=1),
+      numericInput('beta_shape2', 'Shape2', value=1)
+    ),
+    conditionalPanel(
+      condition = 'input.distribution == "uniform"',
+      numericInput('uniform_lb', 'Lower bound', value=0),
+      numericInput('uniform_ub', 'Upper bound', value=1)
     ),
     br(),
     h4('Simulation parameters'),

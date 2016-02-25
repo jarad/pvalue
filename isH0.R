@@ -20,8 +20,12 @@ isH0 = function(input) {
                      'normal' = rnorm(1, input$normal_mean, input$normal_sd),
                      'point mass' = input$point_location,
                      't' = input$t_location+input$t_scale * rt(1,input$t_df),
-                     'log-normal' = rlnorm(1, input$lognormal_location, input$lognormal_scale))
- #     theta = rnorm(1, mean, sd)
+                     'log-normal' = rlnorm(1, input$lognormal_location, input$lognormal_scale),
+                     'gamma' = rgamma(1, input$gamma_shape, input$gamma_rate),
+                     'beta' = rbeta(1, input$beta_shape1, input$beta_shape2),
+                     'uniform' = runif(1, input$uniform_lb, input$uniform_ub))
+
+      cat(theta)
       y = rnorm(1,theta)
     }
     
